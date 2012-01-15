@@ -33,7 +33,7 @@
 
 @implementation MWFeedItem
 
-@synthesize identifier, title, link, date, updated, summary, content, enclosures;
+@synthesize identifier, title, link, date, updated, summary, content, enclosures, categories, sourceLink, sourceTitle, author;
 
 #pragma mark NSObject
 
@@ -55,6 +55,10 @@
 	[summary release];
 	[content release];
 	[enclosures release];
+    [categories release];
+    [sourceTitle release];
+    [sourceLink release];
+    [author release];
 	[super dealloc];
 }
 
@@ -70,6 +74,12 @@
 		summary = [[decoder decodeObjectForKey:@"summary"] retain];
 		content = [[decoder decodeObjectForKey:@"content"] retain];
 		enclosures = [[decoder decodeObjectForKey:@"enclosures"] retain];
+        categories = [[decoder decodeObjectForKey:@"categories"] retain];
+		sourceTitle = [[decoder decodeObjectForKey:@"sourceTitle"] retain];
+		sourceLink = [[decoder decodeObjectForKey:@"sourceLink"] retain];
+		enclosures = [[decoder decodeObjectForKey:@"enclosures"] retain];
+		author = [[decoder decodeObjectForKey:@"author"] retain];
+
 	}
 	return self;
 }
@@ -83,6 +93,10 @@
 	if (summary) [encoder encodeObject:summary forKey:@"summary"];
 	if (content) [encoder encodeObject:content forKey:@"content"];
 	if (enclosures) [encoder encodeObject:enclosures forKey:@"enclosures"];
+	if (categories) [encoder encodeObject:enclosures forKey:@"categories"];
+	if (sourceTitle) [encoder encodeObject:enclosures forKey:@"sourceTitle"];
+	if (sourceLink) [encoder encodeObject:enclosures forKey:@"sourceLink"];
+	if (author) [encoder encodeObject:enclosures forKey:@"author"];
 }
 
 @end

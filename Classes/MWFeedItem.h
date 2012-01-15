@@ -38,6 +38,10 @@
 	NSDate *updated; // Date the item was updated if available
 	NSString *summary; // Description of item
 	NSString *content; // More detailed content (if available)
+    NSSet *categories; // Categories (aka tags)
+    NSString *sourceTitle;  // Title of source (of blog)
+    NSString *sourceLink; // Link to source (to blog)
+    NSString *author; // Author of entry
 	
 	// Enclosures: Holds 1 or more item enclosures (i.e. podcasts, mp3. pdf, etc)
 	//  - NSArray of NSDictionaries with the following keys:
@@ -56,5 +60,13 @@
 @property (nonatomic, copy) NSString *summary;
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSArray *enclosures;
+@property (nonatomic, copy) NSSet *categories;
+@property (nonatomic, copy) NSString *sourceTitle;
+@property (nonatomic, copy) NSString *sourceLink;
+@property (nonatomic, copy) NSString *author;
+
+
+
+
 
 @end

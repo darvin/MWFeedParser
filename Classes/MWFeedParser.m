@@ -663,9 +663,26 @@
 					else if ([currentPath isEqualToString:@"/feed/entry/link"]) { [self processAtomLink:currentElementAttributes andAddToMWObject:item]; processed = YES; }
 					else if ([currentPath isEqualToString:@"/feed/entry/id"]) { if (processedText.length > 0) item.identifier = processedText; processed = YES; }
 					else if ([currentPath isEqualToString:@"/feed/entry/summary"]) { if (processedText.length > 0) item.summary = processedText; processed = YES; }
-					else if ([currentPath isEqualToString:@"/feed/entry/content"]) { if (processedText.length > 0) item.content = processedText; processed = YES; }
+					else if ([currentPath isEqualToString:@"/feed/entry/content"]) {
+                        if (processedText.length > 0) 
+                            item.content = processedText; 
+                        processed = YES; }
 					else if ([currentPath isEqualToString:@"/feed/entry/published"]) { if (processedText.length > 0) item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; processed = YES; }
 					else if ([currentPath isEqualToString:@"/feed/entry/updated"]) { if (processedText.length > 0) item.updated = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; processed = YES; }
+                    else if ([currentPath isEqualToString:@"/feed/entry/author"]) { if (processedText.length > 0) item.author = processedText; processed = YES; }
+                    else if ([currentPath isEqualToString:@"/feed/entry/source/title"]) { if (processedText.length > 0) item.sourceTitle = processedText; processed = YES; }
+                    else if ([currentPath isEqualToString:@"/feed/entry/source/link"]) {
+                        item.sourceLink = [currentElementAttributes objectForKey:@"href"]; processed = YES; }
+                    else if ([currentPath isEqualToString:@"/feed/entry/category"]) {
+                        if (item.categories==nil) {
+                            item.categories = [NSSet setWithObject:[currentElementAttributes objectForKey:@"term"]];
+                        } else {
+                            NSSet *newSet = [item.categories setByAddingObject:[currentElementAttributes objectForKey:@"term"]];
+                            item.categories = newSet;
+                        }
+                        processed = YES;
+                    }
+                    
 				}
 				
 				// Info
